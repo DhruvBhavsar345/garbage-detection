@@ -11,3 +11,6 @@
 
 <img src ="2020-09-27 13_08_22-Window.png">
 <img src ="2020-09-27 13_09_49-Window.png">
+
+<p> plots of loss and accuracy with epochs </p>
+<img src = "2020-09-27 13_49_34-Window.png">
