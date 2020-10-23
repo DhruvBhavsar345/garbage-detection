@@ -3,10 +3,11 @@ import os
 import numpy as np
 import pandas as pd
 
-import tensorflow as tf
 from tensorflow.keras.applications import ResNet50
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
-
+from keras.preprocessing.image import ImageDataGenerator
+import tensorflow as tf
+import cv2
+from PIL import Image
 
 
             
@@ -84,14 +85,20 @@ def build_model(num_classes):
 
 early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=5, verbose=1, restore_best_weights=True)
 
+net = build_model(num_classes = 6)
+
+net.compile(optimizer='Adam',
+            loss='categorical_crossentropy',
+            metrics=[tf.keras.metrics.categorical_accuracy])
+
 history = net.fit_generator(
     generator=datagen_train,
     validation_data=datagen_valid,
     epochs=30,
-    validation_freq=1,
+    validation_freq = 1,
     callbacks=[early_stop]
-)
 
+            
 import matplotlib.pyplot as plt
 
 fig, axs = plt.subplots(nrows=1, ncols=2, figsize=(20, 4))
